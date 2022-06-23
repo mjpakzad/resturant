@@ -21,10 +21,12 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function ()
         Route::post('logout', 'AuthController@logout')->name('logout');
 
         Route::prefix('admin')->name('admin')->namespace('Admin')->group(function() {
+            Route::resource('menus', 'MenuController')->only('store');
             Route::resource('foods', 'FoodController')->except(['create', 'edit', 'destroy']);
         });
 
         Route::name('frontend')->namespace('Frontend')->group(function () {
+            Route::resource('menus', 'MenuController')->only(['index', 'show']);
             Route::resource('foods', 'FoodController')->only(['index', 'show']);
         });
     });
