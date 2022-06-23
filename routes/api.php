@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('v1')->namespace('App\Http\Controllers\Api\V1')->group(function () {
+    Route::prefix('admin')->name('admin')->namespace('Admin')->group(function() {
+        Route::resource('foods', 'FoodController')->except(['create', 'edit', 'destroy']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    });
+
+    Route::name('frontend')->namespace('Frontend')->group(function () {
+        Route::resource('foods', 'FoodController')->only(['index', 'show']);
+    });
 });
