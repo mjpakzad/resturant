@@ -29,7 +29,7 @@ class FoodRequest extends FormRequest
             'price'             => 'required|numeric|min:0',
             'preparation_time'  => 'required|numeric|min:0',
             'history'           => 'nullable|string',
-            'menu_id'           => 'required|exists:foods,id',
+            'menu_id'           => 'required|exists:menus,id',
         ];
         switch ($this->method()) {
             case 'POST':
