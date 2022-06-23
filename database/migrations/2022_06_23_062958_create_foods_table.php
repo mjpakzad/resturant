@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
 			$table->string('heading');
-			$table->string('slug');
+			$table->string('slug')->unique();
 			$table->unsignedInteger('stock');
 			$table->unsignedInteger('price');
 			$table->unsignedInteger('preparation_time')->nullable()->comment('Pre minute');
+            $table->foreignId('menu_id');
 			$table->text('history')->nullable();
             $table->timestamps();
+            $table->foreign('menu_id')->references('id')->on('menus')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
