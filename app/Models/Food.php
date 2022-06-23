@@ -29,4 +29,9 @@ class Food extends Model
 	public function getRouteKeyName() {
 		return 'slug';
 	}
+
+    public function orderFoods()
+    {
+        return $this->hasMany(OrderFood::class);
+    }
 }
